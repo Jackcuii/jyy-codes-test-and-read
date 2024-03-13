@@ -4,7 +4,7 @@
 #include <assert.h>
 #include <unistd.h>
 #include <pthread.h>
-
+//应该就可以理解成一个简单的包装，将外部的一个函数包装成满足POSIX条件的线程对象并进行基本的管理（那和pthread本身有什么区别?）
 #define LENGTH(arr) (sizeof(arr) / sizeof(arr[0]))
 
 enum {
@@ -40,7 +40,7 @@ static inline
 void create(void *fn) {
     assert(n_ < LENGTH(threads_));
 
-    // Yes, we have resource leak here!
+    // Yes, we have resource leak here!   //这里的 Resource leak 就是说线程资源没有被释放，即使关闭了也不能复用了
     threads_[n_] = (struct thread) {
         .id = n_ + 1,
         .status = T_LIVE,
