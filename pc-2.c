@@ -14,6 +14,8 @@ retry:
             goto retry;
         }
 
+        // 这样就对了，因为如果你满足条件了，就自始至终不放开这把锁
+
         // The check of sync condition (depth < n) is within
         // the same critical section. As long as we safely
         // protected the shared state, this condition should
