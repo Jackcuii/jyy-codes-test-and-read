@@ -13,6 +13,7 @@ void T_produce() {
         mutex_lock(&lk);
 
         if (!CAN_PRODUCE) {
+            // 陷入休眠，等待别人的唤醒
             cond_wait(&cv, &lk);
             // This is subtle. Seemingly "more efficient"
             // implementation is dangerous for newbies.
@@ -21,7 +22,7 @@ void T_produce() {
         printf("(");
         depth++;
 
-        cond_signal(&cv);
+        cond_signal(&cv); // 条件改变了，唤醒别人
         mutex_unlock(&lk);
     }
 }
