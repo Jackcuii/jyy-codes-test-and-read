@@ -14,6 +14,7 @@ retry:
         if (!ready) goto retry;
 
         // assert(depth < n);
+        // 这是错误的，因为到这里的时候ready已经不满足了！
 
         mutex_lock(&lk);
         printf("(");
