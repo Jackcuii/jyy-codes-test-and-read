@@ -25,7 +25,7 @@ void T_produce() {
         printf("(");
         depth++;
 
-        cond_broadcast(&cv);
+        cond_broadcast(&cv);  // signal换成broadcast了
         mutex_unlock(&lk);
     }
 }
